@@ -10,6 +10,9 @@ namespace GeometryLibrary
     public class AreaFinder
     {
         //Если передается одно значение - считаем, что это круг, а нам передают радиус. Другие фигуры из одного значения создать невозможно.
+        /// <summary>
+        /// Находит площадь круга и возвращает её.
+        /// </summary>
         public static double CountArea(double radius)
         {
             return Circle.CountArea(radius);
@@ -17,12 +20,18 @@ namespace GeometryLibrary
 
         //Если передается 2 значения - представим, что это параллелограмм. 
         //Другие подтипы фигур, которые может обработать этот метод: прямоугольник, квадрат
+        /// <summary>
+        /// Находит площадь прямоугольника либо параллелограмма и возвращает её.
+        /// </summary>
         public static double CountArea(double a, double h)
         {
             return a * h;
         }
 
         //3 значения - считаем, что это треугольник.
+        /// <summary>
+        /// Находит площадь треугольника по трём сторонам a,b,c и возвращает её.
+        /// </summary>
         public static double CountArea(double a, double b, double c)
         {
             return Triangle.CountArea(a, b, c);

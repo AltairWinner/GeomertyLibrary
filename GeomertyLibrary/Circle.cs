@@ -6,7 +6,10 @@ namespace GeometryLibrary
     {
         private double radius;
 
-
+        /// <summary>
+        /// Создаёт объект типа "круг".
+        /// </summary>
+        /// <param name="radius">Радиус круга</param>
         public Circle(double radius)
         {
             this.radius = radius;
