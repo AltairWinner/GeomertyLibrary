@@ -4,15 +4,15 @@ namespace GeometryLibrary
 {
     public class Circle : GeometryShape
     {
-        private double radius;
+        private double _radius;
 
         /// <summary>
         /// Создаёт объект типа "круг".
         /// </summary>
-        /// <param name="radius">Радиус круга</param>
+        /// <param name="radius">Радиус круга.</param>
         public Circle(double radius)
         {
-            this.radius = radius;
+            _radius = radius;
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace GeometryLibrary
         /// </summary>
         public override double CountArea()
         {
-            return CountArea(radius);
+            return CountArea(_radius);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace GeometryLibrary
         /// </summary>
         public static double CountArea(double radius)
         {
-            return (Math.PI * radius* radius);
+            return (Math.PI * radius * radius);
         }
     }
 }

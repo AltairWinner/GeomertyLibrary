@@ -4,19 +4,19 @@ namespace GeometryLibrary
 {
     public class Triangle : GeometryShape
     {
-        private double a, b, c;
+        private double _a, _b, _c;
 
         /// <summary>
-        /// Создает объект типа "Треугольник"
+        /// Создает объект типа "Треугольник".
         /// </summary>
-        /// <param name="a">Первая сторона</param>
-        /// <param name="b">Вторая сторона</param>
-        /// <param name="c">Третья сторона</param>
+        /// <param name="a">Первая сторона.</param>
+        /// <param name="b">Вторая сторона.</param>
+        /// <param name="c">Третья сторона.</param>
         public Triangle(double a, double b, double c)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            _a = a;
+            _b = b;
+            _c = c;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace GeometryLibrary
         /// </summary>
         public override double CountArea()
         {
-            return CountArea(a, b, c);
+            return CountArea(_a, _b, _c);
         }
 
         /// <summary>
@@ -35,19 +35,18 @@ namespace GeometryLibrary
         {
             //Если сумма квадратов двух сторон равна квадрату третьей - то это прямоугольный треугольник
             //Не забываем проверить все возможные варианты
-            if (a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a)
+            if (_a * _a + _b * _b == _c * _c || _a * _a + _c * _c == _b * _b || _b * _b + _c * _c == _a * _a)
                 return true;
             else
                 return false;
-
         }
 
         /// <summary>
         /// Находит площадь треугольника и возвращает её.
         /// </summary>
-        /// <param name="a">Первая сторона</param>
-        /// <param name="b">Вторая сторона</param>
-        /// <param name="c">Третья сторона</param>
+        /// <param name="a">Первая сторона.</param>
+        /// <param name="b">Вторая сторона.</param>
+        /// <param name="c">Третья сторона.</param>
         public static double CountArea(double a, double b, double c)
         {
             double p = (a + b + c) / 2; //Полупериметр
