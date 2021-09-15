@@ -1,32 +1,27 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using GeometryLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GeometryLibraryUnitTests
 {
     [TestClass]
     public class CircleTests
     {
-        //Тестируем нахождение площади круга (объекта)
+        [TestMethod]
+        public void TestConstructor()
+        {
+            Assert.AreEqual(2.5, new Circle(2.5).Radius, "РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СЂР°РґРёСѓСЃСѓ СЃСЂР°Р±РѕС‚Р°Р» РЅРµРІРµСЂРЅРѕ.");
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Circle(-25.2f), "РќРµРєРѕСЂСЂРµРєС‚РЅРѕ РѕР±СЂР°Р±РѕС‚Р°РЅ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Р№ СЂР°РґРёСѓСЃ.");
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Circle(0), "РќРµРєРѕСЂСЂРµРєС‚РЅРѕ РѕР±СЂР°Р±РѕС‚Р°РЅ СЂР°РґРёСѓСЃ, СЂР°РІРЅС‹Р№ РЅСѓР»СЋ.");
+        }
+
+
+        //РўРµСЃС‚РёСЂСѓРµРј РЅР°С…РѕР¶РґРµРЅРёРµ РїР»РѕС‰Р°РґРё РєСЂСѓРіР°
         [TestMethod]
         public void ValidateAreaCountMethod()
         {
-            double radius = 10;
-            double expected = 314.159265359;
-            Circle circle = new Circle(radius);
-
-            double actual = circle.CountArea();
-            Assert.AreEqual(expected, actual, 0.000000001, "Площадь круга найдена неверно.");
-        }
-
-        //Тестируем нахождение площади круга с определенным радиусом
-        [TestMethod]
-        public void ValidateAreaCountMethod_Static()
-        {
-            double radius = 10;
-            double expected = 314.159265359;
-
-            double actual = Circle.CountArea(radius);
-            Assert.AreEqual(expected, actual, 0.000000001, "Площадь круга в статическом методе найдена неверно.");
+            Assert.AreEqual(314.159265359, new Circle(10).CountArea(), 0.000000001, "РџР»РѕС‰Р°РґСЊ РєСЂСѓРіР° РЅР°Р№РґРµРЅР° РЅРµРІРµСЂРЅРѕ.");
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace GeometryLibrary
+namespace GeometryLibrary
 {
     /// <summary>
     /// Представляет собой абстракцию над любой геометрической фигурой.

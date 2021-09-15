@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 
 namespace GeometryLibrary
 {
     public class Triangle : GeometryShape
     {
-        private double _a, _b, _c;
+        public double A { get; private set; }
+        public double B { get; private set; }
+        public double C { get; private set; }
 
         /// <summary>
         /// Создает объект типа "Треугольник".
@@ -14,9 +16,49 @@ namespace GeometryLibrary
         /// <param name="c">Третья сторона.</param>
         public Triangle(double a, double b, double c)
         {
-            _a = a;
-            _b = b;
-            _c = c;
+            if (a <= 0 || b <= 0 || c <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Значения длин сторон должны быть больше нуля.");
+            }
+
+            if (a + b < c || b + c < a || a + c < b)
+            {
+                throw new ArgumentException(@"Невозможно создать треугольник, так как длина 
+                                            одной из сторон больше, чем сумма двух других.");
+            }
+
+            A = a;
+            B = b;
+            C = c;
+        }
+
+        /// <summary>
+        /// Создаёт треугольник из полигона при условии, что полигон имеет 3 вершины.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Возникает, если количество вершин в фигуре не равно 3.</exception>
+        /// <exception cref="ArgumentException">Возникает, если </exception>
+        /// <param name="polygonShape">Полигон, имеющий 3 вершины.</param>
+        public Triangle(PolygonShape polygonShape)
+        {
+            if (polygonShape.vertices.Length != 3)
+                throw new InvalidCastException("Для преобразования в треугольник фигура должна состоять из 3 вершин.");
+
+            var a = Math.Sqrt(
+                Math.Pow(polygonShape.vertices[1].x - polygonShape.vertices[0].x, 2) +
+                Math.Pow(polygonShape.vertices[1].y - polygonShape.vertices[0].y, 2)
+                );
+            var b = Math.Sqrt(
+                Math.Pow(polygonShape.vertices[2].x - polygonShape.vertices[1].x, 2) +
+                Math.Pow(polygonShape.vertices[2].y - polygonShape.vertices[1].y, 2)
+                );
+            var c = Math.Sqrt(
+                Math.Pow(polygonShape.vertices[0].x - polygonShape.vertices[2].x, 2) +
+                Math.Pow(polygonShape.vertices[0].y - polygonShape.vertices[2].y, 2)
+                );
+
+            A = a;
+            B = b;
+            C = c;
         }
 
         /// <summary>
@@ -24,7 +66,8 @@ namespace GeometryLibrary
         /// </summary>
         public override double CountArea()
         {
-            return CountArea(_a, _b, _c);
+            var p = (A + B + C) / 2; //Полупериметр
+            return Math.Sqrt(p * (p - A) * (p - B) * (p - C));
         }
 
         /// <summary>
@@ -35,22 +78,10 @@ namespace GeometryLibrary
         {
             //Если сумма квадратов двух сторон равна квадрату третьей - то это прямоугольный треугольник
             //Не забываем проверить все возможные варианты
-            if (_a * _a + _b * _b == _c * _c || _a * _a + _c * _c == _b * _b || _b * _b + _c * _c == _a * _a)
+            if (A * A + B * B == C * C || A * A + C * C == B * B || B * B + C * C == A * A)
                 return true;
             else
                 return false;
-        }
-
-        /// <summary>
-        /// Находит площадь треугольника и возвращает её.
-        /// </summary>
-        /// <param name="a">Первая сторона.</param>
-        /// <param name="b">Вторая сторона.</param>
-        /// <param name="c">Третья сторона.</param>
-        public static double CountArea(double a, double b, double c)
-        {
-            double p = (a + b + c) / 2; //Полупериметр
-            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
         }
     }
 }
