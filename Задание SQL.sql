@@ -50,7 +50,7 @@ INSERT INTO [dbo].products_categories ([product_id],[category_id]) VALUES (5,5);
 --В итоговой таблице есть как все нужные ряды, так и все нужные столбцы. Первая часть запроса SELECT products.product_name, 
 --categories.category_name выбирает 2 нужных нам столбца из получившейся таблицы и возвращает их.
 --
---Код был протестирован в SQL Server Management Studio, подключеной к Microsoft SQL Server Developer Edition 2019.
+--Код был протестирован в SQL Server Management Studio, подключенной к Microsoft SQL Server Developer Edition 2019.
 SELECT products.product_name, categories.category_name FROM products 
 LEFT JOIN products_categories ON ([products_categories].[product_id]=products.product_id)
 LEFT JOIN categories ON ([products_categories].category_id=categories.category_id)
